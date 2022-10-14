@@ -14,6 +14,8 @@ public class Order implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer idOrder;
 
+    //private stts OrderStatus;
+
 
 
 

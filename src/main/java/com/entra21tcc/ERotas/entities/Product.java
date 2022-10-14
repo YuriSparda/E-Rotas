@@ -14,16 +14,16 @@ public class Product extends Address implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer idProduct;
 
-    public Address fornAddress;
     public String nmProduct;
     public Double valorSeguro;
+    private Address fronAddress;
 
     public Product() {
     }
 
-    public Product(Integer idProduct, Address fornAddress, String nmProduct, Double valorSeguro) {
+    public Product(Integer idProduct, Address fronAddress, String nmProduct, Double valorSeguro) {
         this.idProduct = idProduct;
-        this.fornAddress = fornAddress;
+        this.fronAddress = fronAddress;
         this.nmProduct = nmProduct;
         this.valorSeguro = valorSeguro;
     }
@@ -34,14 +34,6 @@ public class Product extends Address implements Serializable {
 
     public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
-    }
-
-    public Address getFornAddress() {
-        return fornAddress;
-    }
-
-    public void setFornAddress(Address fornAddress) {
-        this.fornAddress = fornAddress;
     }
 
     public String getNmProduct() {
@@ -60,14 +52,22 @@ public class Product extends Address implements Serializable {
         this.valorSeguro = valorSeguro;
     }
 
+    public Address getFronAddress() {
+        return fronAddress;
+    }
+
+    public void setFronAddress(Address fronAddress) {
+        this.fronAddress = fronAddress;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
         result = prime * result + ((idProduct == null) ? 0 : idProduct.hashCode());
-        result = prime * result + ((fornAddress == null) ? 0 : fornAddress.hashCode());
         result = prime * result + ((nmProduct == null) ? 0 : nmProduct.hashCode());
         result = prime * result + ((valorSeguro == null) ? 0 : valorSeguro.hashCode());
+        result = prime * result + ((fronAddress == null) ? 0 : fronAddress.hashCode());
         return result;
     }
 
@@ -85,11 +85,6 @@ public class Product extends Address implements Serializable {
                 return false;
         } else if (!idProduct.equals(other.idProduct))
             return false;
-        if (fornAddress == null) {
-            if (other.fornAddress != null)
-                return false;
-        } else if (!fornAddress.equals(other.fornAddress))
-            return false;
         if (nmProduct == null) {
             if (other.nmProduct != null)
                 return false;
@@ -100,7 +95,17 @@ public class Product extends Address implements Serializable {
                 return false;
         } else if (!valorSeguro.equals(other.valorSeguro))
             return false;
+        if (fronAddress == null) {
+            if (other.fronAddress != null)
+                return false;
+        } else if (!fronAddress.equals(other.fronAddress))
+            return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Product [fronAddress=" + fronAddress + "]";
     }
 
 }
