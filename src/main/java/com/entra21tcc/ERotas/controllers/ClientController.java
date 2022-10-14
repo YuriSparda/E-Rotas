@@ -61,15 +61,6 @@ public class ClientController {
         atualClient.setNumber(pClient.getNumber());
         atualClient.setMail(pClient.getMail());
         atualClient.setCpf(pClient.getCpf());
-        // address
-        atualClient.setCep(pClient.getCep());
-        atualClient.setRua(pClient.getRua());
-        atualClient.setComplemento(pClient.getComplemento());
-        atualClient.setN_Casa(pClient.getN_Casa());
-        atualClient.setCidade(pClient.getCidade());
-        atualClient.setEstado(pClient.getEstado());
-        atualClient.setBairro(pClient.getBairro());
-        // end address
         cRepository.save(atualClient);
         return ResponseEntity.ok().body(atualClient);
 

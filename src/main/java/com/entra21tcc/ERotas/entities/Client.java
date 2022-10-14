@@ -7,17 +7,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.google.firebase.database.annotations.NotNull;
+
 @Entity
-public class Client extends Address implements Serializable {
+public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer idClient;
 
     public String name;
+
+    @NotNull
     public String number;
     public String mail;
     public String cpf;
+    
+    @Autowired
     public Address clientAddress;
 
     public Client() {

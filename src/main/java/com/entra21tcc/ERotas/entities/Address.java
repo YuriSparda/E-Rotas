@@ -1,6 +1,8 @@
 package com.entra21tcc.ERotas.entities;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable{
     public Integer cep;
     public String rua;
     public String estado;
@@ -8,7 +10,7 @@ public class Address {
     public String bairro;
     public Integer n_Casa;
     public String complemento;
-
+    
     public Address(Integer cep, String rua, String estado, String cidade, String bairro, Integer n_Casa,
             String complemento) {
         this.cep = cep;

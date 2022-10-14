@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
-public class Product extends Address implements Serializable {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,14 +18,21 @@ public class Product extends Address implements Serializable {
 
     public String nmProduct;
     public Double valorSeguro;
-    private Address fronAddress;
+
+    @Autowired
+    public Address prodAddress;
+
+    public Product(Integer cep, String rua, String estado, String cidade, String bairro, Integer n_Casa,
+            String complemento) {
+        Address prodAddress=new Address(cep, rua, estado, cidade, bairro, n_Casa, complemento);
+        this.prodAddress=prodAddress;
+    }
 
     public Product() {
     }
 
-    public Product(Integer idProduct, Address fronAddress, String nmProduct, Double valorSeguro) {
+    public Product(Integer idProduct, String nmProduct, Double valorSeguro) {
         this.idProduct = idProduct;
-        this.fronAddress = fronAddress;
         this.nmProduct = nmProduct;
         this.valorSeguro = valorSeguro;
     }
@@ -53,11 +62,11 @@ public class Product extends Address implements Serializable {
     }
 
     public Address getFronAddress() {
-        return fronAddress;
+        return prodAddress;
     }
 
     public void setFronAddress(Address fronAddress) {
-        this.fronAddress = fronAddress;
+        this.prodAddress = fronAddress;
     }
 
     @Override
@@ -67,7 +76,7 @@ public class Product extends Address implements Serializable {
         result = prime * result + ((idProduct == null) ? 0 : idProduct.hashCode());
         result = prime * result + ((nmProduct == null) ? 0 : nmProduct.hashCode());
         result = prime * result + ((valorSeguro == null) ? 0 : valorSeguro.hashCode());
-        result = prime * result + ((fronAddress == null) ? 0 : fronAddress.hashCode());
+        result = prime * result + ((prodAddress == null) ? 0 : prodAddress.hashCode());
         return result;
     }
 
@@ -95,17 +104,17 @@ public class Product extends Address implements Serializable {
                 return false;
         } else if (!valorSeguro.equals(other.valorSeguro))
             return false;
-        if (fronAddress == null) {
-            if (other.fronAddress != null)
+        if (prodAddress == null) {
+            if (other.prodAddress != null)
                 return false;
-        } else if (!fronAddress.equals(other.fronAddress))
+        } else if (!prodAddress.equals(other.prodAddress))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Product [fronAddress=" + fronAddress + "]";
+        return "Product [fronAddress=" + prodAddress + "]";
     }
 
 }
