@@ -24,11 +24,17 @@ public class Client implements Serializable {
     public String number;
     public String mail;
     public String cpf;
-    
+
     @Autowired
     public Address clientAddress;
 
     public Client() {
+    }
+
+    public Client(Integer cep, String rua, String estado, String cidade, String bairro, Integer n_Casa,
+            String complemento) {
+        Address clientAddress = new Address(cep, rua, estado, cidade, bairro, n_Casa, complemento);
+        this.clientAddress = clientAddress;
     }
 
     public Client(Integer idClient, String name, String number, String mail, String cpf, Address clientAddress) {
@@ -37,7 +43,6 @@ public class Client implements Serializable {
         this.number = number;
         this.mail = mail;
         this.cpf = cpf;
-        this.clientAddress = clientAddress;
     }
 
     public Integer getIdClient() {
