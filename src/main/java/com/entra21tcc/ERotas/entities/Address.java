@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Address implements Serializable {
+    
     public Integer cep;
     public String rua;
     public String estado;
@@ -82,5 +83,13 @@ public class Address implements Serializable {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+
+    @Override
+    public String toString() {
+        return "estado : " + estado + " cidade : " + cidade + " bairro :"
+                + bairro + " Rua : " + rua + " Numero : "
+                + n_Casa + " Complemento : " + complemento + "\n CEP :"
+                + cep;
     }
 }

@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.entra21tcc.ERotas.entities.Client;
 
-
 @Repository
-public interface ClientRepository extends JpaRepository<Client,Integer>{
-    
+public interface ClientRepository extends JpaRepository<Client, Integer> {
+
 }

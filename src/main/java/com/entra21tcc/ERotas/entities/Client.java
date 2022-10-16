@@ -1,17 +1,24 @@
 package com.entra21tcc.ERotas.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.entra21tcc.ERotas.entities.CustomMethods.CustomValueFilter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.firebase.database.annotations.NotNull;
 
 @Entity
+@Table(name = "tb_Client")
 public class Client implements Serializable {
 
     @Id
@@ -26,15 +33,13 @@ public class Client implements Serializable {
     public String cpf;
 
     @Autowired
-    public Address clientAddress;
+    public String clientAddress;
+
+    @OneToMany(mappedBy = "user")
+    @JsonInclude(value = JsonInclude.Include.CUSTOM, valueFilter = CustomValueFilter.class)
+    private List<Order> orders = new ArrayList<>();
 
     public Client() {
-    }
-
-    public Client(Integer cep, String rua, String estado, String cidade, String bairro, Integer n_Casa,
-            String complemento) {
-        Address clientAddress = new Address(cep, rua, estado, cidade, bairro, n_Casa, complemento);
-        this.clientAddress = clientAddress;
     }
 
     public Client(Integer idClient, String name, String number, String mail, String cpf, Address clientAddress) {
@@ -43,6 +48,7 @@ public class Client implements Serializable {
         this.number = number;
         this.mail = mail;
         this.cpf = cpf;
+        this.clientAddress = clientAddress.toString();
     }
 
     public Integer getIdClient() {
@@ -85,12 +91,12 @@ public class Client implements Serializable {
         this.cpf = cpf;
     }
 
-    public Address getClientAddress() {
+    public String getClientAddress() {
         return clientAddress;
     }
 
     public void setClientAddress(Address clientAddress) {
-        this.clientAddress = clientAddress;
+        this.clientAddress = clientAddress.toString();
     }
 
     @Override
@@ -146,6 +152,10 @@ public class Client implements Serializable {
         } else if (!clientAddress.equals(other.clientAddress))
             return false;
         return true;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
 }

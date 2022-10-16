@@ -66,4 +66,12 @@ public class ClientController {
 
     }
 
+    @GetMapping(value = "/Client_{id}_address")
+    public ResponseEntity<String> addressFind(@PathVariable Integer id) {
+        Client clientList = cServices.findById(id);
+
+        return ResponseEntity.ok().body(clientList.getClientAddress());
+
+    }
+
 }

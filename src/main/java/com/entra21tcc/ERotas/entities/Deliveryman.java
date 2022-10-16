@@ -1,14 +1,17 @@
 package com.entra21tcc.ERotas.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Deliveryman implements Serializable{
+public class Deliveryman implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +21,12 @@ public class Deliveryman implements Serializable{
     public String placaVeiculo;
     public Integer numero;
 
-    public Deliveryman(){}
-    
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
+
+    public Deliveryman() {
+    }
+
     public Deliveryman(Integer idMotorista, String nmMotorista, String placaVeiculo, Integer numero) {
         this.idMotorista = idMotorista;
         this.nmMotorista = nmMotorista;
@@ -101,5 +108,5 @@ public class Deliveryman implements Serializable{
             return false;
         return true;
     }
-    
+
 }
