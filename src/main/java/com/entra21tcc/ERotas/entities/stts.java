@@ -4,5 +4,5 @@ public enum stts {
     SHIPPED,
     DELIVERED,
     CANCELED,
-    USER_WAY,
+    USER_WAY;
 }

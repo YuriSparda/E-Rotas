@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import com.entra21tcc.ERotas.entities.Address;
 import com.entra21tcc.ERotas.entities.Client;
 import com.entra21tcc.ERotas.entities.Order;
+import com.entra21tcc.ERotas.entities.stts;
 import com.entra21tcc.ERotas.repositories.ClientRepository;
 import com.entra21tcc.ERotas.repositories.OrderRepository;
 
@@ -47,9 +48,10 @@ public class ERotasApplication {
 						"complemento"));
 		return (args) -> {
 			ClientRep.saveAll(Arrays.asList(u1, u2, u3, u4, u5));
-			ordersRep.save(new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1, null));
-			ordersRep.save(new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2, null));
-			ordersRep.save(new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u3, null));
+			ordersRep.save(new Order(null, Instant.parse("2019-06-20T19:53:07Z"), null, u1, null, stts.SHIPPED));
+			ordersRep.save(new Order(null, Instant.parse("2019-07-21T03:42:10Z"), null, u2, null, stts.DELIVERED));
+			ordersRep.save(
+					new Order(null, Instant.parse("2019-07-22T15:21:22Z"), null, u3, null, stts.DELIVERED));
 		};
 	}
 }

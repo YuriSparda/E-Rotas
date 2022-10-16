@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_Order")
 public class Order implements Serializable {
@@ -18,8 +20,14 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idOrder;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd  'T'  HH:mm  'Z'", timezone = "GMT-3")
     private Instant moment;
-    // private Instant Delivered;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd  'T'  HH:mm  'Z'", timezone = "GMT-3")
+    private Instant delivered;
+
+    private stts orderStts;
 
     @ManyToOne
     @JoinColumn(name = "Client_id")
@@ -29,14 +37,15 @@ public class Order implements Serializable {
     @JoinColumn(name = "idDeliverman")
     private Deliveryman deliver;
 
-    public Order(Integer idOrder, Instant moment, Client user, Deliveryman deliver) {
+    public Order(Integer idOrder, Instant moment, Instant delivered, Client user, Deliveryman deliver, stts orderStts) {
         this.idOrder = idOrder;
         this.moment = moment;
         this.user = user;
         this.deliver = deliver;
+        this.delivered = delivered;
+        this.orderStts = orderStts;
     }
 
-    // private stts OrderStatus;
     public Order() {
     }
 
@@ -95,6 +104,22 @@ public class Order implements Serializable {
 
     public void setDeliver(Deliveryman deliver) {
         this.deliver = deliver;
+    }
+
+    public stts getOrderStts() {
+        return orderStts;
+    }
+
+    public void setOrderStts(stts orderStts) {
+        this.orderStts = orderStts;
+    }
+
+    public Instant getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(Object obj) {
+        this.delivered=Instant.now();
     }
 
 }
