@@ -22,7 +22,7 @@ import com.entra21tcc.ERotas.repositories.DeliverymanRepository;
 import com.entra21tcc.ERotas.services.DeliverymanServices;
 
 @RestController
-@RequestMapping(value = "/Clients")
+@RequestMapping(value = "/Deliveryman")
 public class DeliverymanController {
 
     @Autowired
