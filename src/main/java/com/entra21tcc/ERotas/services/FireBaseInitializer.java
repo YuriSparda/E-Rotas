@@ -19,10 +19,11 @@ public class FireBaseInitializer {
   @PostConstruct
   private void initDB() throws IOException {
     InputStream serviceAccount = this.getClass().getClassLoader()
-        .getResourceAsStream("./fire-test-spring-firebase-adminsdk-b7wgc-cadf46abbc.json");
+        .getResourceAsStream("./serviceAccount.json");
 
     FirebaseOptions options = new FirebaseOptions.Builder()
         .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+        .setDatabaseUrl("https://projeto-entra21-default-rtdb.firebaseio.com")
         .build();
 
     if (FirebaseApp.getApps().isEmpty()) {
